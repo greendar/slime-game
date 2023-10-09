@@ -1,6 +1,4 @@
 import random
-import time
-import colorama
 
 # Import slime's health
 Slime_Health = random.randint(20, 30)
