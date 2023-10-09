@@ -1,0 +1,23 @@
+import random
+import time
+import colorama
+
+# Import slime's health
+Slime_Health = random.randint(20, 30)
+print("Slime's Health:", Slime_Health)
+
+# Use a while loop to repeatedly attack until the slime's health is <= 0
+while Slime_Health > 0:
+    input1 = input("Would you like to attack? (Type 'yes' to attack): ")
+
+    if input1 == 'yes':
+        # Generate random damage within the specified range
+        Swords_damage = random.randint(4, 7)
+        Slime_Health -= Swords_damage  # Subtract damage from slime's health
+        print("You attacked the slime!")
+        print("Slime's Health:", Slime_Health)
+    else:
+        print("You chose not to attack.")
+
+# The game loop ends when the slime's health drops to 0 or below
+print("Slime defeated! You win!")
