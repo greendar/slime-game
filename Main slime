@@ -1,6 +1,5 @@
 import random
-import time
-import colorama
+from colorama import init, Fore
 
 # Import slime's health
 Slime_Health = random.randint(20, 30)
@@ -8,22 +7,30 @@ print("Slime's Health:", Slime_Health)
 
 sworddmg = int(input("What Min damage would you like?: "))
 sworddmg1 = int(input("What Max damage would you like?: "))
+player_health = int(input("How much health do you want?: "))
+slimedmgmin = 2
+slimedmgmax = 13
 
-from colorama import init, Fore, Back, Style
-init()
-
-# Use a while loop to repeatedly attack until the slime's health is <= 0
-while Slime_Health > 0:
+# Use a while loop to repeatedly attack until the slime's health is <= 0 or player's health is <= 0
+while Slime_Health > 0 and player_health > 0:
     input1 = input(Fore.GREEN + "Would you like to attack? (Type 'yes' to attack): ")
 
-    if input1 == 'yes':
-        # Generate random damage within the specified range
+# took me a while to find a solution but the input1.lower() makes any input lowercase
+    if input1.lower() == 'yes':
         Swords_damage = random.randint(sworddmg, sworddmg1)
-        Slime_Health -= Swords_damage  # Subtract damage from slime's health
-        print(Fore.RED +"You attacked the slime!")
-        print(Fore.WHITE +"Slime's Health:", Slime_Health)
-    else:
-        print(Fore.LIGHTBLACK_EX +"You chose not to attack.")
+        Slime_Health -= Swords_damage
+        # Subtract slime damage from player's health and print it
+        Actual_DMG = random.randint(slimedmgmin, slimedmgmax)
+        player_health -= Actual_DMG
 
-# The game loop ends when the slime's health drops to 0 or below
-print(Fore.YELLOW + "Slime defeated! You win!")
+        print(Fore.RED + "You attacked the slime!")
+        print(Fore.RED + "The slime attacked you!")
+        print(Fore.WHITE + "Your health:", player_health)
+        print(Fore.WHITE + "Slime's Health:", Slime_Health)
+    else:
+        print(Fore.LIGHTBLACK_EX + "You chose not to attack.")
+
+if Slime_Health <= 0:
+    print(Fore.YELLOW + "Slime defeated! You win!")
+else:
+    print(Fore.YELLOW + "You lost. The slime won.")
