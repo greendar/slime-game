@@ -1,27 +1,43 @@
 import random
 from colorama import init, Fore
 
-# Import slime's health
+init(autoreset=True)  # Initialize Colorama
+# Slime damage inputs
+
+slimedmgmin = 7
+slimedmgmax = 10
+
+# import slime health and dmg, print them both
+
 Slime_Health = random.randint(20, 30)
 print("Slime's Health:", Slime_Health)
+print("Slime's min and max damages are: ", slimedmgmin, slimedmgmax)
+
+# Casual inputs
 
 sworddmg = int(input("What Min damage would you like?: "))
 sworddmg1 = int(input("What Max damage would you like?: "))
 player_health = int(input("How much health do you want?: "))
-slimedmgmin = 2
-slimedmgmax = 13
 
 # Use a while loop to repeatedly attack until the slime's health is <= 0 or player's health is <= 0
 while Slime_Health > 0 and player_health > 0:
     input1 = input(Fore.GREEN + "Would you like to attack? (Type 'yes' to attack): ")
 
-# took me a while to find a solution but the input1.lower() makes any input lowercase
     if input1.lower() == 'yes':
-        Swords_damage = random.randint(sworddmg, sworddmg1)
-        Slime_Health -= Swords_damage
+        dodgeslime = random.randint(1, 10)
+        if dodgeslime != 1:
+            Swords_damage = random.randint(sworddmg, sworddmg1)
+            Slime_Health -= Swords_damage
+        else:
+            print(Fore.YELLOW + "Slime Dodged!")
+
         # Subtract slime damage from player's health and print it
-        Actual_DMG = random.randint(slimedmgmin, slimedmgmax)
-        player_health -= Actual_DMG
+        dodgeplayer = random.randint(1, 10)
+        if dodgeplayer != 1:
+            Actual_DMG = random.randint(slimedmgmin, slimedmgmax)
+            player_health -= Actual_DMG
+        else:
+            print(Fore.YELLOW + "You Dodged!")
 
         print(Fore.RED + "You attacked the slime!")
         print(Fore.RED + "The slime attacked you!")
@@ -34,3 +50,5 @@ if Slime_Health <= 0:
     print(Fore.YELLOW + "Slime defeated! You win!")
 else:
     print(Fore.YELLOW + "You lost. The slime won.")
+
+
